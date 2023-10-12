@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+    <div class="block">
+        <h1 class="title is-1">{{ profile.user.username | default: 'Guest' }}!
+    </div>
+</div>
+
+<div class="content">
+    {% for post in messages %}
+    <div class="box">
+        {{ post.body }}
+        <span class="is-small has-text-grey-light"> By {{ post.user.username }} @ ({{ post.created_at }})</span>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="column is-one-third">
+    <div class="block">
+        <a href="{% url 'illuminati:profile_list' %}">
+            <button class="button is-dark is-outlined is-fullwidth">
+                All Profiles
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="{% url 'illuminati:profile' request.user.profile.id %}">
+            <button class="button is-success is-light is-outlined is-fullwidth">
+                My Profile
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <h2 class="title is-2">Add a Thought</h2>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5" type="submit">
+            Post
+        </button>
+    </form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="button is-success block" type="submit" value="login">
+</form>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+{% endblock %}
